@@ -64,7 +64,7 @@ bash ./configure \
     --openjdk-target=$TARGET \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
-    --with-extra-ldflags="$LDFLAGS -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/openjdk-17/jre/lib/aarch64" \
+    --with-extra-ldflags="$LDFLAGS -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/openjdk-17/lib" \
     --disable-precompiled-headers \
     --disable-warnings-as-errors \
     --enable-option-checking=fatal \
