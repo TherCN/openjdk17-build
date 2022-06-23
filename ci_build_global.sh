@@ -11,7 +11,6 @@ if [ "$BUILD_IOS" != "1" ]; then
   wget -nc -nv -O android-ndk-$NDK_VERSION-linux-x86_64.zip "https://dl.google.com/android/repository/android-ndk-$NDK_VERSION-linux-x86_64.zip"
   ./extractndk.sh
   ./maketoolchain.sh
-export ANDROID_NDK_ROOT="$PWD/android-ndk-$NDK_VERSION"
 else
   # OpenJDK 8 iOS port is still in unusable state, so we need build in debug mode
   export JDK_DEBUG_LEVEL=slowdebug
@@ -22,7 +21,8 @@ else
 fi
 
 # Some modifies to NDK to fix
-
+ls -al
+export ANDROID_NDK_ROOT="$PWD/android-ndk-r21"
 ./getlibs.sh
 ./buildlibs.sh
 ./clonejdk.sh
