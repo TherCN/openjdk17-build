@@ -2,7 +2,6 @@
 set -e
 
 . setdevkitpath.sh
-  
 $NDK/build/tools/make-standalone-toolchain.sh \
 	--arch=${TARGET_SHORT} \
 	--platform=android-21 \

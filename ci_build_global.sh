@@ -21,8 +21,6 @@ else
 fi
 
 # Some modifies to NDK to fix
-ls -al
-export ANDROID_NDK_ROOT="$PWD/android-ndk-r21"
 ./getlibs.sh
 ./buildlibs.sh
 ./clonejdk.sh
