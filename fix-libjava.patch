@@ -1,4 +1,4 @@
---- src/jdk.base/unix/native/libjli/java_md.c	2022-06-22 08:25:04.996696237 +0800
+--- src/java.base/unix/native/libjli/java_md.c	2022-06-22 08:25:04.996696237 +0800
 +++ /data/data/com.termux/files/home/java_md.c	2022-06-22 08:42:39.486695835 +0800
 @@ -992,7 +992,7 @@
              } else {
