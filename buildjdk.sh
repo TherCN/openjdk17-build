@@ -43,7 +43,7 @@ else
   ln -s -f /opt/X11/include/X11 $ANDROID_INCLUDE/
   platform_args=--with-toolchain-type=clang
   AUTOCONF_x11arg="--with-x=/opt/X11/include/X11 --disable-precompiled-headers --prefix=/data/data/bin.mt.plus/files/term/usr/share/openjdk-17"
-  sameflags="-arch arm64 -isysroot $thesysroot -miphoneos-version-min=12.0 -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
+  sameflags="-arch arm64 -isysroot $thesysroot -miphoneos-version-min=12.0 -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/openjdk-17/lib"
   export CFLAGS+=" $sameflags"
   export CXXFLAGS="$sameflags"
 
@@ -64,7 +64,7 @@ bash ./configure \
     --openjdk-target=$TARGET \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
-    --with-extra-ldflags="$LDFLAGS -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/openjdk-17/lib" \
+    --with-extra-ldflags="$LDFLAGS" \
     --disable-precompiled-headers \
     --disable-warnings-as-errors \
     --enable-option-checking=fatal \
