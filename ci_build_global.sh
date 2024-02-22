@@ -1,5 +1,13 @@
 #!/bin/bash
 set -e
+sudo apt install m4 autoconf automake clang-17 -y
+git clone https://github.com/termux/termux-elf-cleaner || true
+cd termux-elf-cleaner
+sudo apt install autoconf m4 automake -y
+autoreconf -vfi
+./configure CXX=/usr/bin/clang++
+make
+cd ..
 . setdevkitpath.sh
 
 export JDK_DEBUG_LEVEL=release
