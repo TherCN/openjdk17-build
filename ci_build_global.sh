@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-sudo apt install m4 autoconf automake clang-17 -y
+wget https://apt.llvm.org/llvm.sh
+sudo bash llvm.sh 17
 git clone https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
 sudo apt install autoconf m4 automake -y
