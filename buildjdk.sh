@@ -1,5 +1,13 @@
 #!/bin/bash
 set -e
+sudo apt install m4 autoconf automake clang -y
+git clone https://github.com/termux/termux-elf-cleaner || true
+cd termux-elf-cleaner
+sudo apt install autoconf m4 automake -y
+autoreconf -vfi
+./configure CXX=/usr/bin/clang++
+make
+cd ..
 . setdevkitpath.sh
 
 export FREETYPE_DIR=$PWD/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT
