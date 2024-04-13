@@ -1,5 +1,5 @@
 diff -uNr mobile-ec285598849a27f681ea6269342cf03cf382eb56/src/java.base/share/native/libjli/java.c mobile-ec285598849a27f681ea6269342cf03cf382eb56.mod/src/java.base/share/native/libjli/java.c
---- mobile-ec285598849a27f681ea6269342cf03cf382eb56/src/java.base/share/native/libjli/java.c	2021-07-06 14:29:24.000000000 +0300
+--- src/java.base/share/native/libjli/java.c	2021-07-06 14:29:24.000000000 +0300
 +++ mobile-ec285598849a27f681ea6269342cf03cf382eb56.mod/src/java.base/share/native/libjli/java.c	2021-07-30 15:23:39.352949077 +0300
 @@ -54,6 +54,32 @@
  #include "java.h"
