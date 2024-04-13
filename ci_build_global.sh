@@ -7,7 +7,7 @@ cd termux-elf-cleaner
 sudo apt install g++-11 cmake -y
 cmake . -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 -DCMAKE_EXE_LINKER_FLAGS="-pthread"
 make
-sudo apt remove g++-11 -y
+sudo rm /usr/bin/ld
 cd ..
 . setdevkitpath.sh
 
