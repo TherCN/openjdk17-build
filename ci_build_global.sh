@@ -1,7 +1,5 @@
 #!/bin/bash
 set -e
-wget https://apt.llvm.org/llvm.sh
-sudo bash llvm.sh 17
 git clone https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
 sudo apt install g++-11 cmake -y
