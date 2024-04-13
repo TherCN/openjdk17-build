@@ -5,7 +5,7 @@ sudo bash llvm.sh 17
 git clone https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
 sudo apt install g++-11 cmake -y
-cmake . -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11
+cmake . -DCMAKE_C_COMPILER=/usr/bin/gcc-11 -DCMAKE_CXX_COMPILER=/usr/bin/g++-11 -DCMAKE_EXE_LINKER_FLAGS="-Wl,-lpthread"
 make
 cd ..
 . setdevkitpath.sh
