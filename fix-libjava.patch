@@ -1,20 +1,42 @@
---- src/java.base/unix/native/libjli/java_md.c	2022-06-22 08:25:04.996696237 +0800
-+++ /data/data/com.termux/files/home/java_md.c	2022-06-22 08:42:39.486695835 +0800
-@@ -992,7 +992,7 @@
-             } else {
-               /* Fake it as best we can or should we punt? */
-               JLI_TraceLauncher("SetExecName fake it = %s\n", argv[0]);
--              JLI_Snprintf(buf, PATH_MAX, "/data/data/%s/storage/jvm/bin/java",
-+              JLI_Snprintf(buf, PATH_MAX, "/data/data/bin.mt.plus/files/term/usr/share/openjdk-17/bin/java",
-                            argv[0]);
-             }
-           }
-@@ -1004,7 +1004,7 @@
-             } else {
-               /* Fake it as best we can or should we punt? */
-               JLI_TraceLauncher("SetExecName fake it 2 = %s\n", argv[0]);
--              JLI_Snprintf(buf, PATH_MAX, "/data/data/%s/storage/jvm/bin/java",
-+              JLI_Snprintf(buf, PATH_MAX, "/data/data/bin.mt.plus/files/term/usr/share/openjdk-17/bin/java",
-                            argv[0]);
-             }
-         }
+diff -uNr mobile-ec285598849a27f681ea6269342cf03cf382eb56/src/java.base/share/native/libjli/java.c mobile-ec285598849a27f681ea6269342cf03cf382eb56.mod/src/java.base/share/native/libjli/java.c
+--- mobile-ec285598849a27f681ea6269342cf03cf382eb56/src/java.base/share/native/libjli/java.c	2021-07-06 14:29:24.000000000 +0300
++++ mobile-ec285598849a27f681ea6269342cf03cf382eb56.mod/src/java.base/share/native/libjli/java.c	2021-07-30 15:23:39.352949077 +0300
+@@ -54,6 +54,32 @@
+ #include "java.h"
+ #include "jni.h"
+ 
++#include <stdbool.h>
++#include <dlfcn.h>
++static void android_disable_tags(){}
++static void android_disable_tags() {
++    void *lib_handle = dlopen("libc.so", RTLD_LAZY);
++    if (lib_handle) {
++        if (android_get_device_api_level() >= 31) {
++            int (*mallopt_func)(int, int) = dlsym(lib_handle, "mallopt");
++            if (mallopt_func) {
++                mallopt_func(M_BIONIC_SET_HEAP_TAGGING_LEVEL, 0);
++            }
++            return;
++        }
++        /* android_get_device_api_level() < 31 */
++        bool (*android_mallopt)(int opcode, void* arg, size_t arg_size) = dlsym(lib_handle, "android_mallopt");
++        if (android_mallopt) {
++            int android_malloc_tag_level = 0;
++            android_mallopt(8, &android_malloc_tag_level, sizeof(android_malloc_tag_level));
++        }
++        dlclose(lib_handle);
++    }
++}
++
+ /*
+  * A NOTE TO DEVELOPERS: For performance reasons it is important that
+  * the program image remain relatively small until after SelectVersion
+@@ -252,6 +270,8 @@
+     _is_java_args = javaargs;
+     _wc_enabled = cpwildcard;
+ 
++    android_disable_tags();
++
+     InitLauncher(javaw);
+     DumpState();
+     if (JLI_IsTraceLauncher()) {
